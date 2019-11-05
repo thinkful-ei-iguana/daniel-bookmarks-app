@@ -13,13 +13,16 @@ function getBookmarks() {
 }
 
 function createBookmark(bookmark) {
-  let body = JSON.stringify(bookmark);
+  // let body = JSON.stringify(bookmark);
   return fetch(`${baseUrl}/bookmarks`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: body
+    body: bookmark
   }).then(res => res.json())
-    .then(json => console.log(json));
+    .then(json => {
+      state.adding = false;
+      getBookmarks();
+    });
 }
 
 function deleteBookmark(id) {

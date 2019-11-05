@@ -30,8 +30,8 @@ function generateBookmarkItem(bookmark) {
   let item;
   if (bookmark.expanded) {
     item = `
-      <li class="bookmark-item expanded toggle-expanded" data-bookmark-id="${bookmark.id}">
-        <div class="expanded-title">
+      <li class="bookmark-item expanded" data-bookmark-id="${bookmark.id}">
+        <div class="expanded-title toggle-expanded">
             <span class="bookmark-title">${bookmark.title}</span>
             <span class="delete-bookmark"><i class="material-icons">delete</i></span>
         </div>
@@ -61,13 +61,13 @@ function generateBookmarkItem(bookmark) {
 
 function generateAddForm() {
   return `
-    <form action="submit">
+    <form class="submit-form" action="submit">
       <label for="url">Add New Bookmark</label>
-      <input name="url" id="url" type="url" placeholder="www.example.com">
+      <input name="url" id="url" type="url" value="https://">
       <div class="border-container">
         <header class="form-header">
-          <span>Link Walkthrough</span>
-          <span class="material-icons">edit</span>
+          <label for="title">Name:</label>
+          <input name="title" id="title" type="text">
         </header>
         <div class="form-container">
           <div class="star-select">
@@ -78,7 +78,7 @@ function generateAddForm() {
             <span class="material-icons">star</span>
           </div>
 
-          <textarea name="description" id="description" placeholder="Add a description (optional)"></textarea>
+          <textarea name="desc" id="desc" placeholder="Add a description (optional)"></textarea>
 
           <div class="buttons-container">
             <button class="cancel-btn btn">Cancel</button>
@@ -93,7 +93,6 @@ function generateAddForm() {
 function generateApp(state) {
   let body;
   if (state.adding) {
-    console.log(state);
     body =  generateAddForm();
   } else {
     body = generateButtonsContainer() + generateBookmarksList(state.bookmarks);

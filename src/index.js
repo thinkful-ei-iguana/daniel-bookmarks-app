@@ -33,12 +33,29 @@ function handleDeleteBookmarkClicked() {
   });
 }
 
+function handleNewBookmarkSubmit() {
+  $('.app-container').on('submit', '.submit-form', event => {
+    event.preventDefault();
+    const formData = serializeJson(event.currentTarget);
+    console.log(formData);
+    api.createBookmark(formData);
+  });
+}
+
+function serializeJson(form) {
+  const formData = new FormData(form);
+  const o = {};
+  formData.forEach((val, name) => o[name] = val);
+  return JSON.stringify(o);
+}
+
 function main() {
   api.getBookmarks();
   handleToggleExpanded();
   handleNewItemClicked();
   handleNewCancelClicked();
   handleDeleteBookmarkClicked();
+  handleNewBookmarkSubmit();
 }
 
 main();
