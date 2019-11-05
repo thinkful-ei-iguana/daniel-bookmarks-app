@@ -33,7 +33,7 @@ function generateBookmarkItem(bookmark) {
       <li class="bookmark-item expanded toggle-expanded" data-bookmark-id="${bookmark.id}">
         <div class="expanded-title">
             <span class="bookmark-title">${bookmark.title}</span>
-            <span class=""><i class="material-icons">delete</i></span>
+            <span class="delete-bookmark"><i class="material-icons">delete</i></span>
         </div>
         <div class="expanded-description">
           <button class="visit-btn btn">Visit Site</button>

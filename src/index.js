@@ -13,9 +13,23 @@ function handleToggleExpanded() {
 
 function handleNewItemClicked() {
   $('.app-container').on('click', '.new-btn', event => {
-    console.log('new handler ran');
     state.adding = true;
     views.render();
+  });
+}
+
+function handleNewCancelClicked() {
+  $('.app-container').on('click', '.cancel-btn', event => {
+    event.preventDefault();
+    state.adding = false;
+    views.render();
+  });
+}
+
+function handleDeleteBookmarkClicked() {
+  $('.app-container').on('click', '.delete-bookmark', event => {
+    const id = views.getIdFromElement(event.currentTarget);
+    api.deleteBookmark(id);
   });
 }
 
@@ -23,6 +37,8 @@ function main() {
   api.getBookmarks();
   handleToggleExpanded();
   handleNewItemClicked();
+  handleNewCancelClicked();
+  handleDeleteBookmarkClicked();
 }
 
 main();

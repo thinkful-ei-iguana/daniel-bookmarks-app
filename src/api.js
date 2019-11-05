@@ -25,9 +25,9 @@ function createBookmark(bookmark) {
 function deleteBookmark(id) {
   return fetch(`${baseUrl}/bookmarks/${id}`, {
     method: 'DELETE'
-  }).then( res =>
-    console.log(`bookmark: ${id} deleted`)
-  );
+  }).then( res => {
+    getBookmarks();
+  });
 }
 
 function updateBookmark(id, bookmark) {
