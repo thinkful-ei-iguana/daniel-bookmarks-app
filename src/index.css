@@ -56,11 +56,14 @@ textarea {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-top: 0.5rem
 }
 
 .btn {
   flex: 1;
   padding: 0.5rem;
+  border: 1px solid grey;
+  text-align: center;
 }
 
 .new-btn {

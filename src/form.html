@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <title>My Bookmarks</title>
+</head>
+
+<body>
+  <div class='tile'>
+    <div class="container">
+      <h1>My Bookmarks</h1>
+
+      <form action="submit">
+        <label for="url">Add New Bookmark</label>
+        <input name="url" id="url" type="url" placeholder="www.example.com">
+        <div class="border-container">
+          <header class="form-header">
+            <span>Link Walkthrough</span>
+            <span class="material-icons">edit</span>
+          </header>
+          <div class="form-container">
+            <div class="star-select">
+              <span class="material-icons">star</span>
+              <span class="material-icons">star</span>
+              <span class="material-icons">star</span>
+              <span class="material-icons">star</span>
+              <span class="material-icons">star</span>
+            </div>
+
+            <textarea name="description" id="description" placeholder="Add a description (optional)"></textarea>
+
+            <div class="buttons-container">
+              <button class="cancel-btn btn">Cancel</button>
+              <button type="submit" class="submit-btn btn">Submit</button>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  
+</body>
+</html>
