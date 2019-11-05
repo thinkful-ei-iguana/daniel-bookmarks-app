@@ -152,3 +152,7 @@ textarea {
   justify-content: center;
   padding-bottom: 0.51rem;
 }
+
+.app-container {
+  width: 100%;
+}
