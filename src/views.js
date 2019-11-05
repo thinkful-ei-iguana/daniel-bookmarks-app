@@ -27,18 +27,39 @@ function generateBookmarksList(bookmarks) {
 }
 
 function generateBookmarkItem(bookmark) {
-  return `
-    <li class="bookmark-item">
-      <span class="bookmark-title">${bookmark.title}</span>
-      <span class="bookmark-stars">
-        <i class="material-icons star">star</i
-        ><i class="material-icons star">star</i
-        ><i class="material-icons star">star</i
-        ><i class="material-icons star">star</i
-        ><i class="material-icons star">star</i>
-      </span>
-    </li>
-  `;
+  state.bookmarks[0].expanded = true;
+  let item;
+  if (bookmark.expanded) {
+    item = `
+      <li class="bookmark-item expanded">
+        <div class="expanded-title">
+            <span class="bookmark-title">expanded title</span>
+            <span class=""><i class="material-icons">delete</i></span>
+        </div>
+        <div class="expanded-description">
+          <button class="visit-btn btn">Visit Site</button>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+        </div>
+      </li>
+    `;
+  } else {
+    item = `
+      <li class="bookmark-item">
+        <span class="bookmark-title">${bookmark.title}</span>
+        <span class="bookmark-stars">
+          <i class="material-icons star">star</i
+          ><i class="material-icons star">star</i
+          ><i class="material-icons star">star</i
+          ><i class="material-icons star">star</i
+          ><i class="material-icons star">star</i>
+        </span>
+      </li>
+    `;
+  }
+  
+  return item;
 }
 
 function generateAddForm() {
@@ -78,7 +99,7 @@ function generateApp(state) {
     console.log(state);
     body =  generateAddForm();
   } else {
-    body = generateButtonsContainer() + generateBookmarksList();
+    body = generateButtonsContainer() + generateBookmarksList(state.bookmarks);
   }
   return body;
 }
