@@ -1,10 +1,17 @@
-const state = {
-  bookmarks: [],
-  adding: false,
-  error: null,
-  filter: 0
-};
+import api from './api.js';
+import views from './views.js';
+
+let bookmarks = [];
+let adding = false;
+let error = null;
+let filter = 0;
+
+
+
 
 export default {
-  state
+  bookmarks,
+  adding,
+  error,
+  filter
 };

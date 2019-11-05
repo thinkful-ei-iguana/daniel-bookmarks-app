@@ -1,9 +1,15 @@
+import views from './views.js';
+import state from './state.js';
+
 const baseUrl = 'https://thinkful-list-api.herokuapp.com/daniel-kent';
 
 function getBookmarks() {
   return fetch(`${baseUrl}/bookmarks`)
     .then(res => res.json())
-    .then(bookmarks => console.log(bookmarks));
+    .then(bookmarks => {
+      state.bookmarks = bookmarks;
+      views.render();
+    });
 }
 
 function createBookmark(bookmark) {
