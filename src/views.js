@@ -27,26 +27,23 @@ function generateBookmarksList(bookmarks) {
 }
 
 function generateBookmarkItem(bookmark) {
-  state.bookmarks[0].expanded = true;
   let item;
   if (bookmark.expanded) {
     item = `
-      <li class="bookmark-item expanded">
+      <li class="bookmark-item expanded toggle-expanded" data-bookmark-id="${bookmark.id}">
         <div class="expanded-title">
-            <span class="bookmark-title">expanded title</span>
+            <span class="bookmark-title">${bookmark.title}</span>
             <span class=""><i class="material-icons">delete</i></span>
         </div>
         <div class="expanded-description">
           <button class="visit-btn btn">Visit Site</button>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          </p>
+          <p>${bookmark.description}</p>
         </div>
       </li>
     `;
   } else {
     item = `
-      <li class="bookmark-item">
+      <li class="bookmark-item toggle-expanded" data-bookmark-id="${bookmark.id}">
         <span class="bookmark-title">${bookmark.title}</span>
         <span class="bookmark-stars">
           <i class="material-icons star">star</i
@@ -104,6 +101,12 @@ function generateApp(state) {
   return body;
 }
 
+function getIdFromElement(el) {
+  return $(el)
+    .closest('.bookmark-item')
+    .data('bookmark-id');
+}
+
 function render() {
   const html = generateApp(state);
   $('.app-container').html(html);
@@ -111,5 +114,6 @@ function render() {
 
 export default {
   generateApp,
-  render
+  render,
+  getIdFromElement
 };
