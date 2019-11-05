@@ -8,7 +8,6 @@ function getBookmarks() {
     .then(res => res.json())
     .then(bookmarks => {
       state.bookmarks = bookmarks;
-      console.log(bookmarks);
       views.render();
     });
 }
