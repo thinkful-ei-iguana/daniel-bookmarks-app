@@ -3,6 +3,12 @@ import state from './state.js';
 
 const baseUrl = 'https://thinkful-list-api.herokuapp.com/daniel-kent';
 
+//     _    ____ ___ 
+//    / \  |  _ \_ _|
+//   / _ \ | |_) | | 
+//  / ___ \|  __/| | 
+// /_/   \_\_|  |___| 
+
 function getBookmarks() {
   return fetch(`${baseUrl}/bookmarks`)
     .then(res => res.json())

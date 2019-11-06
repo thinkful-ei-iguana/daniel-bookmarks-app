@@ -1,6 +1,14 @@
 import state from './state.js';
 
+//  _   _ _____ __  __ _        ____                           _                 
+// | | | |_   _|  \/  | |      / ___| ___ _ __   ___ _ __ __ _| |_ ___  _ __ ___ 
+// | |_| | | | | |\/| | |     | |  _ / _ \ '_ \ / _ \ '__/ _` | __/ _ \| '__/ __|
+// |  _  | | | | |  | | |___  | |_| |  __/ | | |  __/ | | (_| | || (_) | |  \__ \
+// |_| |_| |_| |_|  |_|_____|  \____|\___|_| |_|\___|_|  \__,_|\__\___/|_|  |___/
+                                                                              
 function generateButtonsContainer() {
+  // Creates the HTML for the new bookmark button and the Filter Dropdown 
+
   return `
     <div class="buttons-container">
       <button class="new-btn btn">+ New</button>
@@ -10,6 +18,8 @@ function generateButtonsContainer() {
 }
 
 function generateBookmarksList(bookmarks) {
+  // Creates the HTML for the list of Bookmark Items
+
   let html = `
     <div class="border-container">
       <ul class="bookmarks-list">`;
@@ -27,6 +37,9 @@ function generateBookmarksList(bookmarks) {
 }
 
 function generateBookmarkItem(bookmark) {
+  // Creates the HTML for each bookmark in the bookmark list
+  // Determines if the view is expanded 
+
   let item;
   if (bookmark.expanded) {
     item = `
@@ -60,6 +73,8 @@ function generateBookmarkItem(bookmark) {
 }
 
 function generateAddForm() {
+  // Creates HTML for the add new bookmark form
+
   return `
     <form class="submit-form" action="submit">
       <label for="url">Add New Bookmark</label>
@@ -91,6 +106,9 @@ function generateAddForm() {
 }
 
 function generateApp(state) {
+  // Uses state data and other generate functions to produce the final
+  // html content of the bookmarks app.
+
   let body;
   if (state.adding) {
     body =  generateAddForm();
@@ -99,6 +117,12 @@ function generateApp(state) {
   }
   return body;
 }
+
+//  _   _ _____ ___ _     ___ _____ ___ _____ ____  
+// | | | |_   _|_ _| |   |_ _|_   _|_ _| ____/ ___| 
+// | | | | | |  | || |    | |  | |  | ||  _| \___ \ 
+// | |_| | | |  | || |___ | |  | |  | || |___ ___) |
+//  \___/  |_| |___|_____|___| |_| |___|_____|____/ 
 
 function getIdFromElement(el) {
   return $(el)
