@@ -25,6 +25,7 @@ function createBookmark(bookmark) {
     headers: { 'Content-Type': 'application/json' },
     body: bookmark
   }).then(res => res.json())
+    // eslint-disable-next-line no-unused-vars
     .then(json => {
       state.adding = false;
       getBookmarks();
@@ -34,6 +35,7 @@ function createBookmark(bookmark) {
 function deleteBookmark(id) {
   return fetch(`${baseUrl}/bookmarks/${id}`, {
     method: 'DELETE'
+  // eslint-disable-next-line no-unused-vars
   }).then( res => {
     getBookmarks();
   });

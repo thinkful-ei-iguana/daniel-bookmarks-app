@@ -22,6 +22,7 @@ function handleToggleExpanded() {
 function handleNewItemClicked() {
   // Changes the view to new form and renders
 
+  // eslint-disable-next-line no-unused-vars
   $('.app-container').on('click', '.new-btn', event => {
     state.adding = true;
     views.render();
@@ -57,14 +58,12 @@ function handleNewBookmarkSubmit() {
   $('.app-container').on('submit', '.submit-form', event => {
     event.preventDefault();
     const formData = serializeJson(event.currentTarget);
-    console.log(formData);
     api.createBookmark(formData);
   });
 }
 
 function handleFormStars() {
   $('.app-container').on('change', '.radio', event => {
-    console.log();
     if ($(event.currentTarget).prop('checked')) {
       const el = event.currentTarget;
       let num;
@@ -79,6 +78,13 @@ function handleFormStars() {
   });
 }
 
+function handleFilter() {
+  $('.app-container').on('change', '#filter-select', event => {
+    state.filter = $(event.currentTarget).val();
+    views.render();
+  });
+}
+
 // _   _      _                     
 // | | | | ___| |_ __   ___ _ __ ___ 
 // | |_| |/ _ \ | '_ \ / _ \ '__/ __|
@@ -88,7 +94,6 @@ function handleFormStars() {
 
 function serializeJson(form) {
   const formData = new FormData(form);
-  console.log(formData);
   const o = {};
   formData.forEach((val, name) => o[name] = val);
   return JSON.stringify(o);
@@ -108,6 +113,7 @@ function main() {
   handleDeleteBookmarkClicked();
   handleNewBookmarkSubmit();
   handleFormStars();
+  handleFilter();
 }
 
 main();

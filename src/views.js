@@ -12,19 +12,30 @@ function generateButtonsContainer() {
   return `
     <div class="buttons-container">
       <button class="new-btn btn">+ New</button>
-      <select id="filter-select" class="drop-down btn"></select>
+      <select id="filter-select" class="drop-down btn" >
+        <option value=0 class="dropdown-label">Minimum Rating</option>
+        <option value=0>All</option>
+        <option value=1>One Star</option>
+        <option value=2>Two Stars</option>
+        <option value=3>Three Stars</option>
+        <option value=4>Four Stars</option>
+        <option value=5>Five Stars</option>
+      </select>
     </div>
   `;
 }
 
-function generateBookmarksList(bookmarks) {
+function generateBookmarksList(bookmarks, filter = 0) {
   // Creates the HTML for the list of Bookmark Items
-
+  
+  let filteredBookmarks = state.filterBookmarksByRating(bookmarks, filter); 
+  console.log(filter);
+  console.log(filteredBookmarks);
   let html = `
     <div class="border-container">
       <ul class="bookmarks-list">`;
 
-  bookmarks.forEach(bookmark => {
+  filteredBookmarks.forEach(bookmark => {
     html += generateBookmarkItem(bookmark);
   });
 
@@ -56,7 +67,7 @@ function generateBookmarkStars(num) {
 function generateBookmarkItem(bookmark) {
   // Creates the HTML for each bookmark in the bookmark list
   // Determines if the view is expanded 
-  console.log(`${bookmark.title}: ${bookmark.rating}     ${generateBookmarkStars(bookmark.rating)}`);
+  
   let item;
   let stars;
   if (bookmark.rating) {
@@ -148,7 +159,7 @@ function generateApp(state) {
   if (state.adding) {
     body =  generateAddForm();
   } else {
-    body = generateButtonsContainer() + generateBookmarksList(state.bookmarks);
+    body = generateButtonsContainer() + generateBookmarksList(state.bookmarks, state.filter);
   }
   return body;
 }
