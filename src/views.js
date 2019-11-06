@@ -50,7 +50,7 @@ function generateBookmarkItem(bookmark) {
         </div>
         <div class="expanded-description">
           <button class="visit-btn btn">Visit Site</button>
-          <p>${bookmark.description}</p>
+          <p>${bookmark.desc}</p>
         </div>
       </li>
     `;
@@ -78,19 +78,36 @@ function generateAddForm() {
   return `
     <form class="submit-form" action="submit">
       <label for="url">Add New Bookmark</label>
-      <input name="url" id="url" type="url" value="https://">
+      <input name="url" id="url" type="url" value="https://" required>
       <div class="border-container">
         <header class="form-header">
           <label for="title">Name:</label>
-          <input name="title" id="title" type="text">
+          <input name="title" id="title" type="text" required>
         </header>
         <div class="form-container">
           <div class="star-select">
-            <span class="material-icons">star</span>
-            <span class="material-icons">star</span>
-            <span class="material-icons">star</span>
-            <span class="material-icons">star</span>
-            <span class="material-icons">star</span>
+            <label for="rating">Rating: </label>
+            
+            <input type="radio" name="rating" value="1" id="one" class="radio one">
+            <label for="one">
+              <i class="material-icons star-label one">star</i>
+            </label>
+            <input type="radio" name="rating" value="2" id="two" class="radio two">
+            <label for="two">
+              <i class="material-icons star-label two">star</i>
+            </label>
+            <input type="radio" name="rating" value="3" id="three" class="radio three">
+            <label for="three">
+              <i class="material-icons star-label three">star</i>
+            </label>
+            <input type="radio" name="rating" value="4" id="four" class="radio four">
+            <label for="four">
+              <i class="material-icons star-label four">star</i>
+            </label>
+            <input type="radio" name="rating" value="5" id="five" class="radio five">
+            <label for="five">
+              <i class="material-icons star-label five">star</i>
+            </label>
           </div>
 
           <textarea name="desc" id="desc" placeholder="Add a description (optional)"></textarea>
@@ -130,6 +147,29 @@ function getIdFromElement(el) {
     .data('bookmark-id');
 }
 
+function colorStars() {
+  $('.app-container').on('change', '.radio', event => {
+    console.log();
+    if ($(event.currentTarget).prop('checked')) {
+      $('.one, .two, .three, .four, .five').removeClass('gold');
+      const el = event.currentTarget;
+      if ($(el).hasClass('five')) {
+        $('.one, .two, .three, .four, .five').addClass('gold');
+      }
+      if ($(el).hasClass('four')) {
+        $('.one, .two, .three, .four').addClass('gold');
+      }
+      if ($(el).hasClass('three')) {
+        $('.one, .two, .three').addClass('gold');
+      }
+      if ($(el).hasClass('two')) {
+        $('.one, .two').addClass('gold');
+      }
+      if ($(el).hasClass('one')) $('.one').addClass('gold');
+    }
+  });
+}
+
 function render() {
   const html = generateApp(state);
   $('.app-container').html(html);
@@ -138,5 +178,6 @@ function render() {
 export default {
   generateApp,
   render,
-  getIdFromElement
+  getIdFromElement,
+  colorStars
 };

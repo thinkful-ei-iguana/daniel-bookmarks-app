@@ -42,8 +42,12 @@ function handleDeleteBookmarkClicked() {
   // deletes a bookmark item and renders updated bookmark list
 
   $('.app-container').on('click', '.delete-bookmark', event => {
-    const id = views.getIdFromElement(event.currentTarget);
-    api.deleteBookmark(id);
+    const confirmed = confirm('Are you sure you want to permenantly delete?'); 
+    if (confirmed) {
+      const id = views.getIdFromElement(event.currentTarget);
+      api.deleteBookmark(id);
+    }
+    
   });
 }
 
@@ -67,6 +71,7 @@ function handleNewBookmarkSubmit() {
 
 function serializeJson(form) {
   const formData = new FormData(form);
+  console.log(formData);
   const o = {};
   formData.forEach((val, name) => o[name] = val);
   return JSON.stringify(o);
@@ -85,6 +90,7 @@ function main() {
   handleNewCancelClicked();
   handleDeleteBookmarkClicked();
   handleNewBookmarkSubmit();
+  views.colorStars();
 }
 
 main();

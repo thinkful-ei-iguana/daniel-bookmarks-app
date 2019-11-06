@@ -29,6 +29,20 @@ input[type="text"] {
   margin-bottom: 0.35rem;
 }
 
+input[type="radio"] {
+  opacity: 0;
+  width: 0px;
+}
+
+.star-label:hover, input[type="radio"]:focus + label i {
+  border: 1px solid goldenrod;
+  border-radius: 50%;
+}
+
+.gold {
+  color: goldenrod;
+}
+
 textarea {
   width: 100%;
   min-height: 30vh;
