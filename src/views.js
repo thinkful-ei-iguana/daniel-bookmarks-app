@@ -36,11 +36,35 @@ function generateBookmarksList(bookmarks) {
   return html;
 }
 
+function generateBookmarkStars(num) {
+  // Creates stars according to the Rating
+
+  let star = '<i class="material-icons star">star</i>';    
+  let starsHtml = '';
+  
+  for (let x = 0; x < num; ++x) {
+    starsHtml += star;
+  }
+
+  return `
+    <span class="bookmark-stars">
+      ${starsHtml}
+    </span>
+  `;
+}
+
 function generateBookmarkItem(bookmark) {
   // Creates the HTML for each bookmark in the bookmark list
   // Determines if the view is expanded 
-
+  console.log(`${bookmark.title}: ${bookmark.rating}     ${generateBookmarkStars(bookmark.rating)}`);
   let item;
+  let stars;
+  if (bookmark.rating) {
+    stars = generateBookmarkStars(bookmark.rating);
+  } else {
+    stars = '';
+  }
+
   if (bookmark.expanded) {
     item = `
       <li class="bookmark-item expanded" data-bookmark-id="${bookmark.id}">
@@ -58,13 +82,7 @@ function generateBookmarkItem(bookmark) {
     item = `
       <li class="bookmark-item toggle-expanded" data-bookmark-id="${bookmark.id}">
         <span class="bookmark-title">${bookmark.title}</span>
-        <span class="bookmark-stars">
-          <i class="material-icons star">star</i
-          ><i class="material-icons star">star</i
-          ><i class="material-icons star">star</i
-          ><i class="material-icons star">star</i
-          ><i class="material-icons star">star</i>
-        </span>
+        ${stars}
       </li>
     `;
   }
@@ -147,28 +165,25 @@ function getIdFromElement(el) {
     .data('bookmark-id');
 }
 
-function colorStars() {
-  $('.app-container').on('change', '.radio', event => {
-    console.log();
-    if ($(event.currentTarget).prop('checked')) {
-      $('.one, .two, .three, .four, .five').removeClass('gold');
-      const el = event.currentTarget;
-      if ($(el).hasClass('five')) {
-        $('.one, .two, .three, .four, .five').addClass('gold');
-      }
-      if ($(el).hasClass('four')) {
-        $('.one, .two, .three, .four').addClass('gold');
-      }
-      if ($(el).hasClass('three')) {
-        $('.one, .two, .three').addClass('gold');
-      }
-      if ($(el).hasClass('two')) {
-        $('.one, .two').addClass('gold');
-      }
-      if ($(el).hasClass('one')) $('.one').addClass('gold');
-    }
-  });
+function colorStars(num) {
+  
+  $('.one, .two, .three, .four, .five').removeClass('gold');
+  
+  if (num === 5) {
+    $('.one, .two, .three, .four, .five').addClass('gold');
+  }
+  if (num === 4) {
+    $('.one, .two, .three, .four').addClass('gold');
+  }
+  if (num === 3) {
+    $('.one, .two, .three').addClass('gold');
+  }
+  if (num === 2) {
+    $('.one, .two').addClass('gold');
+  }
+  if (num === 1) $('.one').addClass('gold');
 }
+
 
 function render() {
   const html = generateApp(state);

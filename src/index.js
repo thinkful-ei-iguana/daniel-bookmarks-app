@@ -62,6 +62,23 @@ function handleNewBookmarkSubmit() {
   });
 }
 
+function handleFormStars() {
+  $('.app-container').on('change', '.radio', event => {
+    console.log();
+    if ($(event.currentTarget).prop('checked')) {
+      const el = event.currentTarget;
+      let num;
+      if ($(el).hasClass('five')) num = 5;
+      if ($(el).hasClass('four')) num = 4;
+      if ($(el).hasClass('three')) num = 3;
+      if ($(el).hasClass('two')) num = 2;
+      if ($(el).hasClass('one')) num = 1;
+
+      views.colorStars(num);
+    }
+  });
+}
+
 // _   _      _                     
 // | | | | ___| |_ __   ___ _ __ ___ 
 // | |_| |/ _ \ | '_ \ / _ \ '__/ __|
@@ -90,7 +107,7 @@ function main() {
   handleNewCancelClicked();
   handleDeleteBookmarkClicked();
   handleNewBookmarkSubmit();
-  views.colorStars();
+  handleFormStars();
 }
 
 main();
