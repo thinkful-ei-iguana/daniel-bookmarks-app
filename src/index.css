@@ -22,6 +22,11 @@ i {
   margin-left: 0;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 input[type="text"] {
   padding: 0.35rem;
   width: 100%;

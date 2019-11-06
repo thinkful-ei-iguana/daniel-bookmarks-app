@@ -73,7 +73,7 @@ function generateBookmarkItem(bookmark) {
             <span class="delete-bookmark"><i class="material-icons">delete</i></span>
         </div>
         <div class="expanded-description">
-          <button class="visit-btn btn">Visit Site</button>
+          <a class="visit-btn btn" href="${bookmark.url}">Visit Site</a>
           <p>${bookmark.desc}</p>
         </div>
       </li>
