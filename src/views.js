@@ -86,6 +86,7 @@ function generateBookmarkItem(bookmark) {
             <span class="delete-bookmark"><i class="material-icons">delete</i></span>
         </div>
         <div class="expanded-description">
+          ${stars}
           <a class="visit-btn btn" href="${bookmark.url}">Visit Site</a>
           <p>${bookmark.desc}</p>
         </div>
@@ -122,14 +123,14 @@ function generateAddForm() {
   return `
     ${generateErrorMessage(state.error)}
     <form class="submit-form" action="submit">
-      <label for="url">Add New Bookmark</label>
-      <input name="url" id="url" type="url" value="https://" required>
       <div class="border-container">
         <header class="form-header">
-          <label for="title">Name:</label>
-          <input name="title" id="title" type="text" required>
+          Create New Bookmark
         </header>
-        <div class="form-container">
+        
+          <div class="form-container">
+          <input name="url" id="url" type="url" value="https://" required>
+          <input name="title" id="title" type="text" placeholder="Bookmark Title" required>
           <div class="star-select">
             <label for="rating">Rating: </label>
             
