@@ -15,7 +15,7 @@ function generateButtonsContainer(filter) {
 
   return `
     <div class="buttons-container">
-      <button class="new-btn btn">+ New</button>
+      <button class="new-btn btn">New Bookmark</button>
       <select id="filter-select" class="drop-down btn" >
         <option ${focus[0]} value=0 class="dropdown-label">Minimum Rating</option>
         <option value=0>All</option>
@@ -127,7 +127,6 @@ function generateAddForm() {
         <header class="form-header">
           Create New Bookmark
         </header>
-        
           <div class="form-container">
           <input name="url" id="url" type="url" value="https://" required>
           <input name="title" id="title" type="text" placeholder="Bookmark Title" required>

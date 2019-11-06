@@ -43,6 +43,7 @@ function handleDeleteBookmarkClicked() {
   // deletes a bookmark item and renders updated bookmark list
 
   $('.app-container').on('click', '.delete-bookmark', event => {
+    event.stopPropagation();
     const confirmed = confirm('Are you sure you want to permenantly delete?'); 
     if (confirmed) {
       const id = views.getIdFromElement(event.currentTarget);
@@ -90,6 +91,14 @@ function handleCloseError() {
     console.log('close error ran');
     state.error = null;
     views.render();
+  });
+}
+
+function handleEditBookmarkClicked() {
+  $('.app-container').on('click', '.edit-bookmark', event => {
+    event.stopPropagation();
+    state.editing = true;
+    views.render();    
   });
 }
 

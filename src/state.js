@@ -9,6 +9,7 @@ let bookmarks = [];
 let adding = false;
 let error = null;
 let filter = 0;
+let editing = false;
 
 function filterBookmarksByRating(bookmarks, filter) {
   const filteredBookmarks =  bookmarks.filter(bookmark => bookmark.rating >= filter);
@@ -20,5 +21,6 @@ export default {
   adding,
   error,
   filter,
-  filterBookmarksByRating
+  filterBookmarksByRating,
+  editing
 };
