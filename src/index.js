@@ -85,6 +85,14 @@ function handleFilter() {
   });
 }
 
+function handleCloseError() {
+  $('.app-container').on('click', '.close-error', event => {
+    console.log('close error ran');
+    state.error = null;
+    views.render();
+  });
+}
+
 // _   _      _                     
 // | | | | ___| |_ __   ___ _ __ ___ 
 // | |_| |/ _ \ | '_ \ / _ \ '__/ __|
@@ -114,6 +122,7 @@ function main() {
   handleNewBookmarkSubmit();
   handleFormStars();
   handleFilter();
+  handleCloseError();
 }
 
 main();

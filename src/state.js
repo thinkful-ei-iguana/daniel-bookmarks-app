@@ -12,7 +12,6 @@ let filter = 0;
 
 function filterBookmarksByRating(bookmarks, filter) {
   const filteredBookmarks =  bookmarks.filter(bookmark => bookmark.rating >= filter);
-  console.log(filteredBookmarks);
   return filteredBookmarks;
 }
 

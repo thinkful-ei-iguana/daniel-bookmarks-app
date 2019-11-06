@@ -6,20 +6,24 @@ import state from './state.js';
 // |  _  | | | | |  | | |___  | |_| |  __/ | | |  __/ | | (_| | || (_) | |  \__ \
 // |_| |_| |_| |_|  |_|_____|  \____|\___|_| |_|\___|_|  \__,_|\__\___/|_|  |___/
                                                                               
-function generateButtonsContainer() {
+function generateButtonsContainer(filter) {
   // Creates the HTML for the new bookmark button and the Filter Dropdown 
+
+  let focus = ['', '', '', '', '', ''];
+
+  focus[filter] = 'selected';
 
   return `
     <div class="buttons-container">
       <button class="new-btn btn">+ New</button>
       <select id="filter-select" class="drop-down btn" >
-        <option value=0 class="dropdown-label">Minimum Rating</option>
+        <option ${focus[0]} value=0 class="dropdown-label">Minimum Rating</option>
         <option value=0>All</option>
-        <option value=1>One Star</option>
-        <option value=2>Two Stars</option>
-        <option value=3>Three Stars</option>
-        <option value=4>Four Stars</option>
-        <option value=5>Five Stars</option>
+        <option ${focus[1]} value=1>One Star</option>
+        <option ${focus[2]} value=2>Two Stars</option>
+        <option ${focus[3]} value=3>Three Stars</option>
+        <option ${focus[4]} value=4>Four Stars</option>
+        <option ${focus[5]} value=5>Five Stars</option>
       </select>
     </div>
   `;
@@ -29,8 +33,6 @@ function generateBookmarksList(bookmarks, filter = 0) {
   // Creates the HTML for the list of Bookmark Items
   
   let filteredBookmarks = state.filterBookmarksByRating(bookmarks, filter); 
-  console.log(filter);
-  console.log(filteredBookmarks);
   let html = `
     <div class="border-container">
       <ul class="bookmarks-list">`;
@@ -101,10 +103,24 @@ function generateBookmarkItem(bookmark) {
   return item;
 }
 
+function generateErrorMessage(error) {
+  if (!error) {
+    return '';
+  } else {
+    return `
+      <div class="error-message">
+        <p>${error.message}</p>
+        <i class="material-icons close-error">close</i>
+      </div>
+    `;
+  }
+}
+
 function generateAddForm() {
   // Creates HTML for the add new bookmark form
 
   return `
+    ${generateErrorMessage(state.error)}
     <form class="submit-form" action="submit">
       <label for="url">Add New Bookmark</label>
       <input name="url" id="url" type="url" value="https://" required>
@@ -159,7 +175,7 @@ function generateApp(state) {
   if (state.adding) {
     body =  generateAddForm();
   } else {
-    body = generateButtonsContainer() + generateBookmarksList(state.bookmarks, state.filter);
+    body = generateButtonsContainer(state.filter) + generateErrorMessage(state.error) + generateBookmarksList(state.bookmarks, state.filter);
   }
   return body;
 }

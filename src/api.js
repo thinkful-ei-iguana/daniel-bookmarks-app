@@ -10,50 +10,80 @@ const baseUrl = 'https://thinkful-list-api.herokuapp.com/daniel-kent';
 // /_/   \_\_|  |___| 
 
 function getBookmarks() {
-  return fetch(`${baseUrl}/bookmarks`)
-    .then(res => res.json())
+  return apiFetch(`${baseUrl}/bookmarks`)
     .then(bookmarks => {
       state.bookmarks = bookmarks;
+      views.render();
+    }).catch(err => {
+      state.error = err;
       views.render();
     });
 }
 
 function createBookmark(bookmark) {
   // let body = JSON.stringify(bookmark);
-  return fetch(`${baseUrl}/bookmarks`, {
+  return apiFetch(`${baseUrl}/bookmarks`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: bookmark
-  }).then(res => res.json())
-    // eslint-disable-next-line no-unused-vars
+  })
     .then(json => {
       state.adding = false;
       getBookmarks();
+    }).catch(err => {
+      state.error = err;
+      views.render();
     });
 }
 
 function deleteBookmark(id) {
-  return fetch(`${baseUrl}/bookmarks/${id}`, {
+  return apiFetch(`${baseUrl}/bookmarks/${id}`, {
     method: 'DELETE'
-  // eslint-disable-next-line no-unused-vars
   }).then( res => {
     getBookmarks();
+  }).catch(err => {
+    state.error = err;
+    views.render();
   });
 }
 
 function updateBookmark(id, bookmark) {
   let body = JSON.stringify(bookmark);
-  return fetch(`${baseUrl}/bookmarks/${id}`, {
+  return apiFetch(`${baseUrl}/bookmarks/${id}`, {
     method: 'PATCH',
     headers: {'Content-Type': 'application/json'},
     body: body
-  }).then(res => res.json())
-    .then(x => console.log('Bookmark Updated'));
+  }).then(x => console.log('Bookmark Updated'))
+    .catch(err => {
+      state.error = err;
+      views.render();
+    });
 }
+
+const apiFetch = function (...args) {
+  let error;
+  return fetch(...args)
+    .then(res => {
+      if(!res.ok) {
+        error = {code: res.status};
+        state.error = error;
+        // console.log(state.error);
+      }
+      return res.json();
+    })
+    .then(data => {
+      if (error) {
+        error.message = data.message;
+        return Promise.reject(error);
+      }
+      return data;
+    });
+};
 
 export default {
   getBookmarks,
   createBookmark,
   deleteBookmark,
-  updateBookmark
+  updateBookmark,
+  apiFetch
 };

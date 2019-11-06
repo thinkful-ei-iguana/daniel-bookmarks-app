@@ -181,3 +181,23 @@ textarea {
 .app-container {
   width: 100%;
 }
+
+.error-message {
+  padding: 1px;
+  background-color: lightcoral;
+  margin-top: 0.5rem;
+  border-radius: 0.25rem;
+  position: relative;
+}
+
+.error-message p {
+  margin: 0;
+  padding: 0.5rem;
+}
+
+i.close-error {
+  font-size: 1rem;
+  position: absolute;
+  right: 0.25rem;
+  top: 0.25rem;
+}
