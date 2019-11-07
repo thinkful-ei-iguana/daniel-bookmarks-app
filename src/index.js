@@ -116,6 +116,16 @@ function serializeJson(form) {
   return JSON.stringify(o);
 }
 
+function clickWhenEnter() {
+  $('.app-container').on('keyup', '.tabable', event => {
+    console.log(event);
+
+    if (event.keyCode === 13) {
+      $(event.currentTarget).click();
+    }
+  });
+}
+
 //   __  __       _       
 //  |  \/  | __ _(_)_ __  
 //  | |\/| |/ _` | | '_ \ 
@@ -132,6 +142,7 @@ function main() {
   handleFormStars();
   handleFilter();
   handleCloseError();
+  clickWhenEnter();
 }
 
 main();

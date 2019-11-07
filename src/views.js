@@ -81,7 +81,7 @@ function generateBookmarkItem(bookmark) {
   if (bookmark.expanded) {
     item = `
       <li class="bookmark-item expanded" data-bookmark-id="${bookmark.id}">
-        <div class="expanded-title toggle-expanded">
+        <div class="expanded-title toggle-expanded tabable" tabindex="0">
             <span class="bookmark-title">${bookmark.title}</span>
             <span class="delete-bookmark"><i class="material-icons">delete</i></span>
         </div>
@@ -94,7 +94,7 @@ function generateBookmarkItem(bookmark) {
     `;
   } else {
     item = `
-      <li class="bookmark-item toggle-expanded" data-bookmark-id="${bookmark.id}">
+      <li class="bookmark-item toggle-expanded tabable" data-bookmark-id="${bookmark.id}" tabindex="0">
         <span class="bookmark-title">${bookmark.title}</span>
         ${stars}
       </li>
